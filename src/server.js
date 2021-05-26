@@ -8,15 +8,22 @@ http.createServer(function (req, res) {
     let today = new Date();
     let months = today.getMonth() + 1
     let minutes = today.getMinutes()
+    let seconds = today.getSeconds()
 
+    // creating date with the format dd-MM-yyyy and time with 
     let date = today.getDate() + '-' + (months < 10 ? '0' + months : months) + '-' + today.getFullYear();
-    let time = today.getHours() + ":" + (today.getMinutes() < 10 ? '0' + today.getMinutes() : today.getMinutes()) + ":" + today.getSeconds();
+    let time = today.getHours() + ":" + (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
     let dateTime = date + ' | ' + time;
     let url = req.url;
 
-    if (url === '/gettime') {
+    if (url === '/gettime') {  // if request is made on /gettime -> get current time (time that was built above)
 
         res.write(`Bucharest GMT+2: ${dateTime}`);
+        res.end();
+    }
+    if (url === '/home')  // if request is made on /home -> displays welcome home
+    {
+        res.write('Welcome home');
         res.end();
     }
 

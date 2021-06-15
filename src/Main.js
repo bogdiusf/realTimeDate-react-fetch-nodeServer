@@ -13,8 +13,8 @@ export default function Main() {
     const [time, setTime] = useState('')
 
     useEffect(() => {
-        async function getDate() {
-            await axios.get('/gettime')  // fetching data from node server on /gettime
+        function getDate() {
+            axios.get('/gettime')  // fetching data from node server on /gettime
                 .then(response => { console.log(response.data); setTime(response.data) })
                 .catch(error => console.log(error))
             setTimeout(getDate, 1000)   // updating time every 1 second
